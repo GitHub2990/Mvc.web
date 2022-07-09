@@ -1,0 +1,19 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model Mvc.web.ViewModels.HomeIndexViewModel
+
+<html>
+<body>
+    <ul>
+        @foreach (var s in Model.Students)
+        {
+            <li>
+                @s.Name (@s.Age)
+            </li>
+        }
+    </ul>
+    </body>
+</html>
+

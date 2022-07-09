@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Mvc.web.Services;
+using Mvc.web.Model;
 
 namespace Mvc.web
 {
@@ -24,6 +26,8 @@ namespace Mvc.web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddMvc(options=> { options.EnableEndpointRouting = false; });
+            services.AddScoped<IRepotitery<Student>, InMemoryRepotitery>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,14 +47,11 @@ namespace Mvc.web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
+            app.UseMvc(builder=> {
+                builder.MapRoute("Default","{controller=Home}/{action=Index}/{id?}");
             });
+
+         
         }
     }
 }
