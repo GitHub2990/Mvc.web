@@ -7,10 +7,28 @@
 <html>
 <body>
     <form method="post" action="/Home/Create">
-        <input asp-for="FristName" />
-        <input asp-for="LastName" />
-        <input asp-for="BirthDay" />
-        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+        <div>
+            <label asp-for="FristName"></label>
+            <input asp-for="FristName" />
+            <span asp-validation-for="FristName"></span>
+        </div>
+     
+        <div>
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName"></span>
+        </div>
+        <div>
+            <label asp-for="BirthDay"></label>
+            <input asp-for="BirthDay" />
+            <span asp-validation-for="BirthDay"></span>
+        </div>
+        <div>
+            <label asp-for="Gender"></label>
+            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()"></select>
+            <span asp-validation-for="Gender"></span>
+        </div>
+        <div asp-validation-summary="All"></div>
         <button type="submit" name="save">保存</button>
     </form>
   

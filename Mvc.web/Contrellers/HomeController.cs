@@ -55,24 +55,34 @@ namespace Mvc.web.Contrellers
         }
 
         [HttpPost]
+      /*  [ValidateAntiForgeryToken] */  //防止伪造请求
         public IActionResult Create(StudentCreateViewModel student)
         {
-            var newStudent = new Student
+            //  ModelState.IsValid 验证 StudentCreateViewModel 模型标记的字段是否验证通过 
+            if (ModelState.IsValid)
             {
-                FristName = student.FristName,
-                LastName = student.LastName,
-                BirthDay = student.BirthDay,
-                Gender = student.Gender
-            };
-           var newModel =  _repotitery.add(newStudent);
+                var newStudent = new Student
+                {
+                    FristName = student.FristName,
+                    LastName = student.LastName,
+                    BirthDay = student.BirthDay,
+                    Gender = student.Gender
+                };
+                var newModel = _repotitery.add(newStudent);
 
 
 
-            //post 后请重定向   不然刷新页面 容易重复提交
-            //return View("ShowInfo", newModel);
+                //post 后请重定向   不然刷新页面 容易重复提交
+                //return View("ShowInfo", newModel);
+
+                //重定向
+                return RedirectToAction(nameof(Detail), new { Id = newModel.Id });
+            }
+            else 
+            {
+                return View();
+            }
           
-            //重定向
-            return RedirectToAction(nameof(Detail),new { Id=newModel.Id });
         }
 
      
