@@ -9,5 +9,7 @@ namespace Mvc.web.Services
     public interface IRepotitery<T> where T : class
     {
         IEnumerable<T> GetAll();
+
+        Student GetStudent(int id);
     }
 }

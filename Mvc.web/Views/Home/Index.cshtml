@@ -10,7 +10,8 @@
         @foreach (var s in Model.Students)
         {
             <li>
-                @s.Name (@s.Age)
+                @s.Name (@s.Age) 
+                <a asp-action="Detail" asp-route-id="@s.Id" asp-controller="Home">Detail</a>
             </li>
         }
     </ul>

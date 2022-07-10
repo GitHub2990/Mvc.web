@@ -40,7 +40,10 @@ namespace Mvc.web.Services
             }
             };
         }
-     
 
+        public Student GetStudent(int id)
+        {
+            return GetAll().Where(x=>x.Id==id).FirstOrDefault();
+        }
     }
 }

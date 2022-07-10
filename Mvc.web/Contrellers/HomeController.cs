@@ -22,7 +22,7 @@ namespace Mvc.web.Contrellers
         {
             var list = _repotitery.GetAll();
             var vms = list.Select(x => new StudentsViewModel
-            {
+            {   Id=x.Id,
                 Name = $"{x.FristName}{x.LastName}",
                 Age = DateTime.Now.Subtract(x.BirthDay).Days / 365
             }) ;
@@ -32,5 +32,19 @@ namespace Mvc.web.Contrellers
             };
             return View(vm);
         }
+
+
+        public IActionResult Detail(int Id)
+        {
+            var student =  _repotitery.GetStudent(Id);
+            var studentVM = new StudentsViewModel
+            {
+                Name = $"{student.FristName}{student.LastName}",
+                Age = DateTime.Now.Subtract(student.BirthDay).Days / 365
+            };
+            return View(studentVM);
+        }
+
+
     }
 }
