@@ -27,7 +27,7 @@ namespace Mvc.web
         {
             services.AddRazorPages();
             services.AddMvc(options=> { options.EnableEndpointRouting = false; });
-            services.AddScoped<IRepotitery<Student>, InMemoryRepotitery>();
+            services.AddSingleton<IRepotitery<Student>, InMemoryRepotitery>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

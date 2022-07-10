@@ -8,9 +8,11 @@ namespace Mvc.web.Services
 {
     public  class InMemoryRepotitery :IRepotitery<Student>
     {
-        public IEnumerable<Student> GetAll()
+        private static List<Student> _students;
+
+        public InMemoryRepotitery() 
         {
-            return new List<Student> {
+            _students= new List<Student> {
                 new Student {
                             Id=1,
                             FristName="wang",
@@ -41,9 +43,23 @@ namespace Mvc.web.Services
             };
         }
 
+
+        public Student add(Student student)
+        {
+            var maxid = _students.Max(x => x.Id);
+            student.Id = maxid + 1;
+            _students.Add(student);
+            return student;
+        }
+
+        public IEnumerable<Student> GetAll()
+        {
+            return _students;
+        }
+
         public Student GetStudent(int id)
         {
-            return GetAll().Where(x=>x.Id==id).FirstOrDefault();
+            return _students.FirstOrDefault(x => x.Id == id);
         }
     }
 }

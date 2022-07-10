@@ -6,8 +6,13 @@
 <html>
 <body>
     <ul>
-        <li>@Model.Name (@Model.Age)</li>
-       <a asp-action="Index">返回</a>
+        学号：
+        <li>@Model.Id </li>
+        姓名：
+        <li>@Model.Name </li>
+        年龄：
+        <li>@Model.Age </li>
+        <a asp-action="Index">返回</a>
     </ul>
 </body>  
 </html>

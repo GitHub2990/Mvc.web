@@ -11,5 +11,6 @@ namespace Mvc.web.Services
         IEnumerable<T> GetAll();
 
         Student GetStudent(int id);
+        T add(T student);
     }
 }

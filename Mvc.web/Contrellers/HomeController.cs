@@ -39,6 +39,7 @@ namespace Mvc.web.Contrellers
             var student =  _repotitery.GetStudent(Id);
             var studentVM = new StudentsViewModel
             {
+                Id = student.Id,
                 Name = $"{student.FristName}{student.LastName}",
                 Age = DateTime.Now.Subtract(student.BirthDay).Days / 365
             };
@@ -46,5 +47,34 @@ namespace Mvc.web.Contrellers
         }
 
 
+        [HttpGet]
+        public IActionResult Create()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(StudentCreateViewModel student)
+        {
+            var newStudent = new Student
+            {
+                FristName = student.FristName,
+                LastName = student.LastName,
+                BirthDay = student.BirthDay,
+                Gender = student.Gender
+            };
+           var newModel =  _repotitery.add(newStudent);
+
+
+
+            //post 后请重定向   不然刷新页面 容易重复提交
+            //return View("ShowInfo", newModel);
+          
+            //重定向
+            return RedirectToAction(nameof(Detail),new { Id=newModel.Id });
+        }
+
+     
     }
 }
